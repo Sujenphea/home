@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* disable scroll to refresh on iOS */
+body {
+  overflow: hidden
+}

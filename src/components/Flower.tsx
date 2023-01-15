@@ -6,13 +6,13 @@ import { FlowerSpawner } from "./FlowerSpawner"
 import { PetalStyleModel } from "./PetalModel"
 import { Stalk } from "./Stalk"
 
-import { useMousePosition } from "../hooks/useMousePosition"
 import { useWindowSize } from "../hooks/useWindowSize"
 
 import { useThreejsObjects } from "../hooks/useThreejsObjects"
 import { getTextureFromImage } from "../utils/getTextureFromImage"
 import { DEG_TO_RAD } from "../utils/math"
 import { RegenerateRefType } from "../types/RegenerateRefType"
+import { usePointer } from "../hooks/useMousePosition"
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -82,8 +82,9 @@ const Flower = forwardRef<
   {
     windowWidth: number | undefined
     windowHeight: number | undefined
-    mouseX: number
-    mouseY: number
+    pointerX: number
+    pointerY: number
+    pointerType: string
     cameraRef: RefObject<Camera>
     cameraBoxRef: MutableRefObject<Object3D | null>
     cameraBoxInnerRef: MutableRefObject<Object3D | null>
@@ -248,10 +249,17 @@ const Flower = forwardRef<
 
     // mouse move
     const mouseMove = { x: 0, y: 0 }
-    mouseMove.y =
-      ((props.mouseX - (props.windowWidth || 0) / 2) / (props.windowWidth || 0)) * viewMouseRotationAmountSpin
-    mouseMove.x =
-      ((props.mouseY - (props.windowHeight || 0) / 2) / (props.windowHeight || 0)) * viewMouseRotationAmountPitch
+    if (props.pointerType === "mouse") {
+      mouseMove.y =
+        ((props.pointerX - (props.windowWidth || 0) / 2) / (props.windowWidth || 0)) * viewMouseRotationAmountSpin
+      mouseMove.x =
+        ((props.pointerY - (props.windowHeight || 0) / 2) / (props.windowHeight || 0)) * viewMouseRotationAmountPitch
+    } else {
+      mouseMove.y =
+        (-(props.pointerX - (props.windowWidth || 0) / 2) / (props.windowWidth || 0)) * viewMouseRotationAmountSpin
+      mouseMove.x =
+        (-(props.pointerY - (props.windowHeight || 0) / 2) / (props.windowHeight || 0)) * viewMouseRotationAmountPitch
+    }
 
     const i = { x: 0, y: 0 }
     i.y = (Math.sin(time * viewWobbleSpeed) + Math.sin(time * viewWobbleSpeed * 0.764)) * viewWobbleAmount
@@ -410,7 +418,7 @@ Flower.displayName = "Flower"
 export const FlowerCanvas = forwardRef<RegenerateRefType, { isLoaded: boolean }>((props, ref) => {
   /* ---------------------------------- hooks --------------------------------- */
   const { width: windowWidth, height: windowHeight } = useWindowSize()
-  const { x: mouseX, y: mouseY } = useMousePosition()
+  const { x: pointerX, y: pointerY, pointerType } = usePointer()
 
   /* ---------------------------------- refs ---------------------------------- */
   const cameraRef = useRef<Camera | null>(null)
@@ -452,8 +460,9 @@ export const FlowerCanvas = forwardRef<RegenerateRefType, { isLoaded: boolean }>
         ref={flowerRef}
         windowWidth={windowWidth}
         windowHeight={windowHeight}
-        mouseX={mouseX}
-        mouseY={mouseY}
+        pointerX={pointerX}
+        pointerY={pointerY}
+        pointerType={pointerType}
         cameraRef={cameraRef}
         cameraBoxInnerRef={cameraBoxInnerRef}
         cameraBoxRef={cameraBoxRef}

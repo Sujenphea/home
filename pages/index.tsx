@@ -47,7 +47,7 @@ export default function Home() {
   const flowerDisplay = () => {
     return (
       <>
-        <div className="absolute inset-0">
+        <div className="absolute inset-y-0 left-0 w-full md:w-1/2">
           <FlowerCanvas ref={flowerCanvasRef} isLoaded={imagesLoaded && !loading} />
         </div>
 
@@ -64,7 +64,7 @@ export default function Home() {
 
   /* ---------------------------------- main ---------------------------------- */
   return (
-    <div>
+    <div className="overflow-hidden">
       {(!initialised || !imagesLoaded || loading) && <Loader />}
 
       {/* flower */}

@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react"
 
-export const useMousePosition = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+export const usePointer = () => {
+  const [pointer, setPointer] = useState({ x: 0, y: 0, pointerType: "mouse" })
 
-  const updateMousePosition = (ev: MouseEvent) => {
-    setMousePosition({ x: ev.clientX, y: ev.clientY })
+  const updatePointerPosition = (ev: PointerEvent) => {
+    setPointer({ x: ev.pageX, y: ev.pageY, pointerType: ev.pointerType })
   }
 
   useEffect(() => {
-    window.addEventListener("mousemove", updateMousePosition)
+    window.addEventListener("pointermove", updatePointerPosition)
 
-    return () => window.removeEventListener("mousemove", updateMousePosition)
+    return () => {
+      window.removeEventListener("pointermove", updatePointerPosition)
+    }
   }, [])
 
-  return mousePosition
+  return pointer
 }
