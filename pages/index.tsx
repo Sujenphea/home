@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion"
 import { useState, useRef, useEffect } from "react"
 import { FlowerCanvas } from "../src/components/Flower"
 import Loader from "../src/components/Loader"
@@ -68,18 +67,7 @@ export default function Home() {
       {(!initialised || !imagesLoaded || loading) && <Loader />}
 
       {/* flower */}
-      {initialised && (
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.15 } }}
-            exit={{ opacity: 0, transition: { duration: 0.3 } }}
-            className="absolute inset-0 bg-[rgb(245,228,229)]"
-          >
-            {flowerDisplay()}
-          </motion.div>
-        </AnimatePresence>
-      )}
+      {initialised && <div className="absolute inset-0 bg-[rgb(245,228,229)]">{flowerDisplay()}</div>}
     </div>
   )
 }
