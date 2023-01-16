@@ -70,7 +70,6 @@ export const HoverGradientText = (
             ease: "linear",
           },
         }}
-        className="px-2 pt-1" // make sure bg covers text
         style={{
           gridArea: "1 / 1",
           color: "transparent",
@@ -88,7 +87,6 @@ export const HoverGradientText = (
 
       {/* spotlight effect */}
       <div
-        className="px-2 pt-1" // make sure bg covers text
         style={{
           gridArea: "1 / 1",
           color: "transparent",
@@ -113,7 +111,7 @@ export const HoverGradientText = (
             ease: "linear",
           },
         }}
-        className="px-2 pt-1 transition-opacity duration-[1s]" // make sure bg covers text
+        className="transition-opacity duration-500 ease-linear"
         style={{
           opacity: hovering ? 0 : 1,
           gridArea: "1 / 1",

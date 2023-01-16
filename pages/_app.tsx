@@ -5,7 +5,7 @@ import { ReactNode, useEffect, useRef } from "react"
 import "../styles/globals.css"
 
 // eslint-disable-next-line camelcase
-import { Oxygen } from "@next/font/google"
+import { Inter } from "@next/font/google"
 import localFont from "@next/font/local"
 import gsap from "gsap"
 import { cursorZIndex } from "../src/constants/uiConstants"
@@ -20,10 +20,10 @@ export const P22SneakyFont = localFont({
   display: "swap",
 })
 
-export const oxygenFont = Oxygen({
-  weight: ["300", "400", "700"],
+export const interFont = Inter({
+  weight: "variable",
   subsets: ["latin", "latin-ext"],
-  variable: "--oxygen",
+  variable: "--inter",
   display: "swap",
 })
 

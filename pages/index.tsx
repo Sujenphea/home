@@ -48,7 +48,7 @@ export default function Home() {
   const flowerDisplay = () => {
     return (
       <>
-        <div className="absolute inset-y-0 left-0 w-full translate-y-20 lg:w-1/2 lg:translate-y-0">
+        <div className="absolute inset-y-0 left-0 w-full -translate-x-10">
           <FlowerCanvas ref={flowerCanvasRef} isLoaded={imagesLoaded && !loading} />
         </div>
 
@@ -56,7 +56,15 @@ export default function Home() {
         <div
           className="pointer-events-none absolute inset-0 select-none"
           style={{
-            background: "linear-gradient(rgba(245, 228, 229, 0.15) 65%, rgba(218, 241, 239, 0.7) 100%)",
+            background: "linear-gradient(rgba(100, 100, 100, 0.1) 0%, rgba(0, 0, 0, 0) 50%)",
+          }}
+        />
+
+        {/* opaque overlay */}
+        <div
+          className="pointer-events-none absolute inset-0 select-none"
+          style={{
+            background: "linear-gradient(rgba(226,244,255,0.15) 65%, rgba(225,228,245,0.7) 100%)",
           }}
         />
       </>
@@ -65,29 +73,18 @@ export default function Home() {
 
   const contentDisplay = () => {
     return (
-      <div className="flex flex-col items-center gap-2 lg:items-start lg:gap-4 xl:gap-5">
+      <div className="flex flex-col items-end gap-3">
         {/* heading */}
-        <HoverGradientText className="whitespace-nowrap font-heading text-6xl font-bold uppercase tracking-wide xl:text-7xl">
+        <HoverGradientText
+          nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
+          hoverGradient="linear-gradient(90deg, rgba(50,80,120,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,120,1) 100%)"
+          className="whitespace-nowrap text-right text-6xl font-bold uppercase tracking-wide md:text-7xl lg:text-[92px]"
+        >
           Sujen Phea
         </HoverGradientText>
 
         {/* subheading */}
-        <div className="mb-4 lg:mb-8">
-          <div className="text-xl text-black-alpha50 xl:text-2xl">Web Developer.</div>
-        </div>
-
-        {/* social media */}
-        <a
-          className="group relative h-8 w-8 xl:h-10 xl:w-10"
-          href="https://github.com/sujenphea"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <IconGithub
-            width="100%"
-            className="pointer-events-none absolute top-0 left-0 flex h-full w-full items-center justify-center transition-transform group-hover:scale-90"
-          />
-        </a>
+        <div className="text-xl text-black-alpha50 lg:text-2xl lg:font-medium">Web Developer</div>
       </div>
     )
   }
@@ -98,13 +95,27 @@ export default function Home() {
       {(!initialised || !imagesLoaded || loading) && <Loader />}
 
       {/* flower */}
-      {initialised && <div className="absolute inset-0 bg-[rgb(245,228,229)]">{flowerDisplay()}</div>}
+      {/* {initialised && <div className="absolute inset-0 bg-[rgb(230,229,213)]">{flowerDisplay()}</div>} */}
+      {initialised && <div className="absolute inset-0 bg-[rgba(210,219,243,0.5)]">{flowerDisplay()}</div>}
 
-      {/* content */}
       {initialised && (
-        <div className="absolute left-1/2 top-20 -translate-x-1/2 lg:right-40 lg:top-1/2 lg:left-auto lg:-translate-y-1/2 lg:translate-x-0 xl:right-1/4">
-          {contentDisplay()}
-        </div>
+        <>
+          {/* content */}
+          <div className="absolute right-10 top-20 ">{contentDisplay()}</div>
+
+          {/* footer */}
+          <div className="absolute bottom-10 left-10">
+            {/* social media */}
+            <a
+              className="group relative block h-8 w-8 xl:h-10 xl:w-10"
+              href="https://github.com/sujenphea"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <IconGithub className="pointer-events-none h-full w-full transition-transform group-hover:scale-90" />
+            </a>
+          </div>
+        </>
       )}
     </div>
   )
