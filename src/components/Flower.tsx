@@ -12,7 +12,7 @@ import { useThreejsObjects } from "../hooks/useThreejsObjects"
 import { getTextureFromImage } from "../utils/getTextureFromImage"
 import { DEG_TO_RAD } from "../utils/math"
 import { RegenerateRefType } from "../types/RegenerateRefType"
-import { usePointer } from "../hooks/useMousePosition"
+import { usePointer } from "../hooks/usePointer"
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */

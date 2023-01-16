@@ -4,5 +4,11 @@
 
 /* disable scroll to refresh on iOS */
 body {
+  cursor: none;
   overflow: hidden
+}
+
+a,
+button {
+  cursor: none;
 }
