@@ -68,14 +68,14 @@ export default function Home() {
       <div className="flex flex-col items-center gap-2 lg:items-start lg:gap-4 xl:gap-5">
         {/* heading */}
         <div className="cursor-default">
-          <HoverGradientText className="whitespace-nowrap font-heading text-5xl font-bold uppercase tracking-wide xl:text-6xl">
+          <HoverGradientText className="whitespace-nowrap font-heading text-6xl font-bold uppercase tracking-wide xl:text-7xl">
             Sujen Phea
           </HoverGradientText>
         </div>
 
         {/* subheading */}
         <div className="mb-4 cursor-default lg:mb-8">
-          <div className="text-lg text-black-alpha50 xl:text-xl">Web Developer.</div>
+          <div className="text-xl text-black-alpha50 xl:text-2xl">Web Developer.</div>
         </div>
 
         {/* social media */}
