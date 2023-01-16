@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import { FlowerCanvas } from "../src/components/Flower"
 import Loader from "../src/components/Loader"
 import { useImages } from "../src/hooks/useImages"
+import { IconGithub } from "../src/Icons/IconGithub"
 import { RegenerateRefType } from "../src/types/RegenerateRefType"
 
 /* -------------------------------------------------------------------------- */
@@ -61,6 +62,25 @@ export default function Home() {
     )
   }
 
+  const contentDisplay = () => {
+    return (
+      <div className="flex flex-col items-center gap-2 lg:items-start lg:gap-4">
+        {/* heading */}
+        <div className="text-5xl uppercase">Sujen Phea</div>
+
+        {/* subheading */}
+        <div className="mb-4 lg:mb-8">
+          <div className="text-lg uppercase text-black-alpha50">Web Developer.</div>
+        </div>
+
+        {/* social media */}
+        <a className="h-8 w-8" href="https://github.com/sujenphea" target="_blank" rel="noreferrer">
+          <IconGithub />
+        </a>
+      </div>
+    )
+  }
+
   /* ---------------------------------- main ---------------------------------- */
   return (
     <div className="overflow-hidden">
@@ -68,6 +88,13 @@ export default function Home() {
 
       {/* flower */}
       {initialised && <div className="absolute inset-0 bg-[rgb(245,228,229)]">{flowerDisplay()}</div>}
+
+      {/* content */}
+      {initialised && (
+        <div className="absolute left-1/2 top-20 -translate-x-1/2 lg:right-40 lg:top-1/2 lg:left-auto lg:-translate-y-1/2 lg:translate-x-0 xl:right-1/4">
+          {contentDisplay()}
+        </div>
+      )}
     </div>
   )
 }

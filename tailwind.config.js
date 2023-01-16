@@ -34,6 +34,10 @@ module.exports = {
       colors: {
         contentColor: "#000",
         bgColor: "#fff",
+        black: {
+          DEFAULT: "rgba(0, 0, 0, 1)",
+          alpha50: "rgba(0, 0, 0, 0.5)",
+        },
       },
     },
   },
