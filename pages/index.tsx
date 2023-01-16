@@ -79,8 +79,16 @@ export default function Home() {
         </div>
 
         {/* social media */}
-        <a className="h-8 w-8 xl:h-10 xl:w-10" href="https://github.com/sujenphea" target="_blank" rel="noreferrer">
-          <IconGithub />
+        <a
+          className="group relative h-8 w-8 xl:h-10 xl:w-10"
+          href="https://github.com/sujenphea"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <IconGithub
+            width="100%"
+            className="pointer-events-none absolute top-0 left-0 flex h-full w-full items-center justify-center transition-transform group-hover:scale-90"
+          />
         </a>
       </div>
     )
