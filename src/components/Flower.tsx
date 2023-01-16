@@ -402,7 +402,7 @@ const Flower = forwardRef<
           <object3D ref={budInnerRef} position={[0, 0, budOffsetY]}>
             <mesh scale={[1, 1, budVertScale]}>
               <sphereGeometry args={[budSize, 32, 32]} />
-              <meshPhongMaterial color={new Color(stalkColour)} shininess={3} />
+              <meshPhongMaterial color={new Color(stalkColour)} shininess={3} precision="mediump" />
             </mesh>
           </object3D>
         </object3D>

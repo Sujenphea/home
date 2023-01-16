@@ -548,6 +548,7 @@ export class PetalStyleModel {
       specularMap,
       normalMap,
       normalScale: new Vector2(this.normalScale, this.normalScale),
+      precision: "mediump",
       // wrapRGB: new Vector3(this.lightingWrap, this.lightingWrap, this.lightingWrap),
       // wrapAround: !0,
     })
