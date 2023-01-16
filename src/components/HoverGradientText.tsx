@@ -74,9 +74,9 @@ export const HoverGradientText = (
         style={{
           gridArea: "1 / 1",
           color: "transparent",
-          background:
+          backgroundImage:
             hoverGradient ||
-            "linear-gradient(90deg, rgba(18,194,233,1) 0%, rgba(196,113,237,1) 31%, rgba(246,79,89,1) 70%, rgba(18,194,233,1) 100%)",
+            "linear-gradient(90deg, rgba(60,60,60,1) 0%, rgba(100,100,180,1) 50%, rgba(60,60,60,1) 100%)",
           backgroundClip: "text",
           height: "100%",
           width: "100%",
@@ -113,13 +113,12 @@ export const HoverGradientText = (
             ease: "linear",
           },
         }}
-        className="px-2 pt-1 transition-opacity duration-300" // make sure bg covers text
+        className="px-2 pt-1 transition-opacity duration-[1s]" // make sure bg covers text
         style={{
           opacity: hovering ? 0 : 1,
           gridArea: "1 / 1",
           color: "transparent",
-          background:
-            nonHoverGradient || "linear-gradient(to right, #747474 0, #1f1f1f 40%, #1f1f1f 60%, #747474 100%)",
+          background: nonHoverGradient || "linear-gradient(to right, #000 0, #666 20%, #000 40%)",
           backgroundClip: "text",
           height: "100%",
           width: "100%",
