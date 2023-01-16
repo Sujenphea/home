@@ -11,29 +11,7 @@ import localFont from "@next/font/local"
 /* -------------------------------------------------------------------------- */
 /*                                    fonts                                   */
 /* -------------------------------------------------------------------------- */
-export const ligurinoFont = localFont({
-  /// rmeove
-  src: "../public/fonts/LigurinoRegular.ttf",
-  variable: "--ligurino",
-  display: "swap",
-})
-
-export const roughLoveFont = localFont({
-  // maybe
-  src: "../public/fonts/RoughLove.otf",
-  variable: "--rough-love",
-  display: "swap",
-})
-
-export const filmotypeLuckyFont = localFont({
-  // maybe
-  src: "../public/fonts/FilmotypeLucky.ttf",
-  variable: "--filmotype-lucky",
-  display: "swap",
-})
-
 export const P22SneakyFont = localFont({
-  // maybe
   src: "../public/fonts/p22Sneaky.ttf",
   variable: "--p22-sneaky",
   display: "swap",
