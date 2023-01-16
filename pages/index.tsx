@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 import { FlowerCanvas } from "../src/components/Flower"
+import { HoverGradientText } from "../src/components/HoverGradientText"
 import Loader from "../src/components/Loader"
 import { useImages } from "../src/hooks/useImages"
 import { IconGithub } from "../src/Icons/IconGithub"
@@ -67,9 +68,9 @@ export default function Home() {
       <div className="flex flex-col items-center gap-2 lg:items-start lg:gap-4 xl:gap-5">
         {/* heading */}
         <div className="cursor-default">
-          <div className="whitespace-nowrap font-heading text-5xl font-bold uppercase tracking-wide xl:text-6xl">
+          <HoverGradientText className="whitespace-nowrap font-heading text-5xl font-bold uppercase tracking-wide xl:text-6xl">
             Sujen Phea
-          </div>
+          </HoverGradientText>
         </div>
 
         {/* subheading */}
