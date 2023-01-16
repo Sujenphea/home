@@ -47,7 +47,7 @@ export default function Home() {
   const flowerDisplay = () => {
     return (
       <>
-        <div className="absolute inset-y-0 left-0 w-full md:w-1/2">
+        <div className="absolute inset-y-0 left-0 w-full translate-y-20 lg:w-1/2 lg:translate-y-0">
           <FlowerCanvas ref={flowerCanvasRef} isLoaded={imagesLoaded && !loading} />
         </div>
 
