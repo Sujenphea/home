@@ -64,17 +64,21 @@ export default function Home() {
 
   const contentDisplay = () => {
     return (
-      <div className="flex flex-col items-center gap-2 lg:items-start lg:gap-4">
+      <div className="flex flex-col items-center gap-2 lg:items-start lg:gap-4 xl:gap-5">
         {/* heading */}
-        <div className="text-5xl uppercase">Sujen Phea</div>
+        <div className="cursor-default">
+          <div className="whitespace-nowrap font-heading text-5xl font-bold uppercase tracking-wide xl:text-6xl">
+            Sujen Phea
+          </div>
+        </div>
 
         {/* subheading */}
-        <div className="mb-4 lg:mb-8">
-          <div className="text-lg uppercase text-black-alpha50">Web Developer.</div>
+        <div className="mb-4 cursor-default lg:mb-8">
+          <div className="text-lg text-black-alpha50 xl:text-xl">Web Developer.</div>
         </div>
 
         {/* social media */}
-        <a className="h-8 w-8" href="https://github.com/sujenphea" target="_blank" rel="noreferrer">
+        <a className="h-8 w-8 xl:h-10 xl:w-10" href="https://github.com/sujenphea" target="_blank" rel="noreferrer">
           <IconGithub />
         </a>
       </div>
