@@ -54,16 +54,39 @@ export default function Home() {
     }, 2e3)
   }, [])
 
+  // animate
   useEffect(() => {
     if (imagesLoaded && !loading) {
       ;(async () => {
         setShowFlower(true)
 
-        await titleAnimationControls.start({ opacity: 1, x: 0, transition: { duration: 0.5, delay: 2.5 } })
-        await subheadingAnimationControls.start({ opacity: 1, x: 0, transition: { duration: 0.3 } })
+        await titleAnimationControls.start({
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.6,
+            delay: 2.5,
+            type: "tween",
+            ease: "easeOut",
+          },
+        })
+        await subheadingAnimationControls.start({
+          opacity: 1,
+          x: 0,
+          transition: {
+            duration: 0.6,
+            type: "tween",
+            ease: "easeOut",
+          },
+        })
         await socialMediaAnimationControls.start({
           opacity: 1,
-          transition: { duration: 0.3, delay: 0.5, type: "tween", ease: "easeInOut" },
+          transition: {
+            duration: 0.5,
+            delay: 0.5,
+            type: "tween",
+            ease: "easeInOut",
+          },
         })
       })()
     }
