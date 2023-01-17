@@ -6,7 +6,6 @@ import "../styles/globals.css"
 
 // eslint-disable-next-line camelcase
 import { Inter } from "@next/font/google"
-import localFont from "@next/font/local"
 import gsap from "gsap"
 import { cursorZIndex } from "../src/constants/uiConstants"
 import { usePointer } from "../src/hooks/usePointer"
@@ -14,12 +13,6 @@ import { usePointer } from "../src/hooks/usePointer"
 /* -------------------------------------------------------------------------- */
 /*                                    fonts                                   */
 /* -------------------------------------------------------------------------- */
-export const P22SneakyFont = localFont({
-  src: "../public/fonts/p22Sneaky.ttf",
-  variable: "--p22-sneaky",
-  display: "swap",
-})
-
 export const interFont = Inter({
   weight: "variable",
   subsets: ["latin", "latin-ext"],
