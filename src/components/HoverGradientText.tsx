@@ -78,6 +78,7 @@ export const HoverGradientText = (
             hoverGradient ||
             "linear-gradient(90deg, rgba(60,60,60,1) 0%, rgba(100,100,180,1) 50%, rgba(60,60,60,1) 100%)",
           backgroundClip: "text",
+          WebkitBackgroundClip: "text",
           height: "100%",
           width: "100%",
           backgroundSize: "200%",
@@ -96,6 +97,7 @@ export const HoverGradientText = (
             100 - (hoverSpotlightRadius || 50)
           }%, rgba(0, 0, 0, 0), rgb(0, 0, 0, 1) ${hoverSpotlightRadius || 50}%`,
           backgroundClip: "text",
+          WebkitBackgroundClip: "text",
         }}
       >
         {children}
@@ -120,6 +122,7 @@ export const HoverGradientText = (
           color: "transparent",
           background: nonHoverGradient || "linear-gradient(to right, #000 0, #666 20%, #000 40%)",
           backgroundClip: "text",
+          WebkitBackgroundClip: "text",
           height: "100%",
           width: "100%",
           backgroundSize: "200%",
