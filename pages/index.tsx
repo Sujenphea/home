@@ -100,46 +100,50 @@ export default function Home() {
     return (
       <div className="flex flex-col items-end gap-3">
         {/* heading */}
-        <motion.div
-          initial={{ opacity: 0, x: (windowWidth || 0) < 768 ? "0" : "100%" }}
-          animate={titleAnimationControls}
-        >
-          {/* desktop */}
-          <div className="hidden md:block">
-            <HoverGradientText
-              nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
-              hoverGradient="linear-gradient(90deg, rgba(50,80,120,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,120,1) 100%)"
-              className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide md:text-7xl lg:text-[92px]"
-            >
-              Sujen Phea
-            </HoverGradientText>
-          </div>
+        <div className="relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, x: (windowWidth || 0) < 768 ? "0" : "100%" }}
+            animate={titleAnimationControls}
+          >
+            {/* desktop */}
+            <div className="hidden md:block">
+              <HoverGradientText
+                nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
+                hoverGradient="linear-gradient(90deg, rgba(50,80,120,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,120,1) 100%)"
+                className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide md:text-7xl lg:text-[92px]"
+              >
+                Sujen Phea
+              </HoverGradientText>
+            </div>
 
-          {/* mobile */}
-          <div className="block md:hidden">
-            <div className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide">Sujen Phea</div>
-          </div>
-        </motion.div>
+            {/* mobile */}
+            <div className="block md:hidden">
+              <div className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide">Sujen Phea</div>
+            </div>
+          </motion.div>
+        </div>
 
         {/* subheading + socail media */}
-        <motion.div
-          initial={{ opacity: 0, x: (windowWidth || 0) < 768 ? "0" : "100%" }}
-          animate={subheadingAnimationControls}
-        >
-          <div className="flex items-center gap-3">
-            <div className="text-xl text-black-alpha50 lg:text-2xl lg:font-medium">Web Developer</div>
+        <div className="relative overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, x: (windowWidth || 0) < 768 ? "0" : "100%" }}
+            animate={subheadingAnimationControls}
+          >
+            <div className="flex items-center gap-3">
+              <div className="text-xl text-black-alpha50 lg:text-2xl lg:font-medium">Web Developer</div>
 
-            {/* mobile social media -> cannot position at the bottom ... ios hides it ... */}
-            <a
-              className="relative block h-8 w-8 md:hidden"
-              href="https://github.com/sujenphea"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <IconGithub className="pointer-events-none h-full w-full" />
-            </a>
-          </div>
-        </motion.div>
+              {/* mobile social media -> cannot position at the bottom ... ios hides it ... */}
+              <a
+                className="relative block h-8 w-8 md:hidden"
+                href="https://github.com/sujenphea"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <IconGithub className="pointer-events-none h-full w-full" />
+              </a>
+            </div>
+          </motion.div>
+        </div>
       </div>
     )
   }
@@ -150,7 +154,6 @@ export default function Home() {
       <AnimatePresence>{(!initialised || !imagesLoaded || loading) && <Loader />}</AnimatePresence>
 
       {/* flower */}
-      {/* {initialised && <div className="absolute inset-0 bg-[rgb(230,229,213)]">{flowerDisplay()}</div>} */}
       {initialised && <div className="absolute inset-0 bg-[rgba(210,219,243,0.5)]">{flowerDisplay()}</div>}
 
       <AnimatePresence>
