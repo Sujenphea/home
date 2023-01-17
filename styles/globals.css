@@ -2,13 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* disable scroll to refresh on iOS */
 body {
-  cursor: none;
-  overflow: hidden
+  /* disable scroll to refresh on iOS */
+  overflow: hidden;
+
 }
 
-a,
-button {
-  cursor: none;
+div {
+  cursor: default;
+}
+
+/* desktop disable cursor */
+@media only screen and (min-width: 768px) {
+
+  a,
+  button,
+  body,
+  div {
+    cursor: none;
+  }
+
+
 }

@@ -4,6 +4,7 @@ import { FlowerCanvas } from "../src/components/Flower"
 import { HoverGradientText } from "../src/components/HoverGradientText"
 import Loader from "../src/components/Loader"
 import { useImages } from "../src/hooks/useImages"
+import { useWindowSize } from "../src/hooks/useWindowSize"
 import { IconGithub } from "../src/Icons/IconGithub"
 import { RegenerateRefType } from "../src/types/RegenerateRefType"
 
@@ -28,6 +29,7 @@ const images = [
 /* -------------------------------------------------------------------------- */
 export default function Home() {
   const { loaded: imagesLoaded } = useImages(images)
+  const { width: windowWidth } = useWindowSize()
 
   /* --------------------------------- states --------------------------------- */
   const [initialised, setInitialised] = useState(false)
@@ -71,7 +73,7 @@ export default function Home() {
   const flowerDisplay = () => {
     return (
       <>
-        <div className="absolute inset-y-0 left-0 w-full lg:-translate-x-10">
+        <div className="absolute inset-y-0 left-0 w-full translate-y-10 md:translate-y-0 lg:-translate-x-10">
           <FlowerCanvas ref={flowerCanvasRef} isLoaded={showFlower} />
         </div>
 
@@ -98,23 +100,45 @@ export default function Home() {
     return (
       <div className="flex flex-col items-end gap-3">
         {/* heading */}
-        <motion.div initial={{ opacity: 0, x: "100%" }} animate={titleAnimationControls}>
-          <HoverGradientText
-            nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
-            hoverGradient="linear-gradient(90deg, rgba(50,80,120,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,120,1) 100%)"
-            className="whitespace-nowrap text-right text-6xl font-bold uppercase tracking-wide md:text-7xl lg:text-[92px]"
-          >
-            Sujen Phea
-          </HoverGradientText>
+        <motion.div
+          initial={{ opacity: 0, x: (windowWidth || 0) < 768 ? "0" : "100%" }}
+          animate={titleAnimationControls}
+        >
+          {/* desktop */}
+          <div className="hidden md:block">
+            <HoverGradientText
+              nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
+              hoverGradient="linear-gradient(90deg, rgba(50,80,120,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,120,1) 100%)"
+              className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide md:text-7xl lg:text-[92px]"
+            >
+              Sujen Phea
+            </HoverGradientText>
+          </div>
+
+          {/* mobile */}
+          <div className="block md:hidden">
+            <div className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide">Sujen Phea</div>
+          </div>
         </motion.div>
 
-        {/* subheading */}
+        {/* subheading + socail media */}
         <motion.div
-          initial={{ opacity: 0, x: "100%" }}
+          initial={{ opacity: 0, x: (windowWidth || 0) < 768 ? "0" : "100%" }}
           animate={subheadingAnimationControls}
-          className="text-xl text-black-alpha50 lg:text-2xl lg:font-medium"
         >
-          Web Developer
+          <div className="flex items-center gap-3">
+            <div className="text-xl text-black-alpha50 lg:text-2xl lg:font-medium">Web Developer</div>
+
+            {/* mobile social media -> cannot position at the bottom ... ios hides it ... */}
+            <a
+              className="relative block h-8 w-8 md:hidden"
+              href="https://github.com/sujenphea"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <IconGithub className="pointer-events-none h-full w-full" />
+            </a>
+          </div>
         </motion.div>
       </div>
     )
@@ -139,17 +163,17 @@ export default function Home() {
               opacity: 1,
               transition: { duration: 0.2 },
             }}
+            className="relative h-screen w-screen"
           >
             {/* content */}
-            <div className="absolute right-10 top-20 ">{contentDisplay()}</div>
+            <div className="absolute right-10 top-10 md:top-20">{contentDisplay()}</div>
 
-            {/* footer */}
+            {/* desktop: socail media */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={socialMediaAnimationControls}
-              className="absolute bottom-10 left-10"
+              className="absolute bottom-10 left-10 hidden md:block"
             >
-              {/* social media */}
               <a
                 className="group relative block h-8 w-8 xl:h-10 xl:w-10"
                 href="https://github.com/sujenphea"
