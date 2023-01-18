@@ -1,5 +1,5 @@
 import seedrandom from "seedrandom"
-import { DoubleSide, MeshPhongMaterial, Texture, Vector2 } from "three"
+import { DoubleSide, MeshPhongMaterial, TextureLoader, Vector2 } from "three"
 
 /* -------------------------------------------------------------------------- */
 /*                                   helpers                                  */
@@ -24,6 +24,8 @@ type MaterialProperties = {
 /* eslint-disable no-bitwise */
 /* eslint-disable class-methods-use-this */
 export class PetalStyleModel {
+  textureLoader = new TextureLoader()
+
   backgroundGradientBottomAlpha: number
 
   backgroundColors: string[]
@@ -455,21 +457,6 @@ export class PetalStyleModel {
     return { r: n, g: r, b: i }
   }
 
-  private getTextureFromImage(image: HTMLImageElement) {
-    const t = document.createElement("canvas")
-    t.width = image.width
-    t.height = image.height
-
-    const n = t.getContext("2d")
-    if (n) {
-      n.drawImage(image, 0, 0)
-    }
-
-    const r = new Texture(t)
-    r.needsUpdate = !0
-    return r
-  }
-
   private setMaterialProperties(t: MaterialProperties) {
     this.setDefaultProperties()
 
@@ -527,17 +514,9 @@ export class PetalStyleModel {
   /* --------------------------------- public --------------------------------- */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public getNewMaterialFromStyle(_e: number) {
-    const colorImage = new Image()
-    colorImage.src = this.colorMap
-    const colorMap = this.getTextureFromImage(colorImage)
-
-    const specularImage = new Image()
-    specularImage.src = this.specularMap
-    const specularMap = this.getTextureFromImage(specularImage)
-
-    const normalImage = new Image()
-    normalImage.src = this.normalMap
-    const normalMap = this.getTextureFromImage(normalImage)
+    const colorMap = this.textureLoader.load(this.colorMap)
+    const normalMap = this.textureLoader.load(this.normalMap)
+    const specularMap = this.textureLoader.load(this.specularMap)
 
     const s = new MeshPhongMaterial({
       color: this.color,
@@ -549,8 +528,6 @@ export class PetalStyleModel {
       normalMap,
       normalScale: new Vector2(this.normalScale, this.normalScale),
       precision: "mediump",
-      // wrapRGB: new Vector3(this.lightingWrap, this.lightingWrap, this.lightingWrap),
-      // wrapAround: !0,
     })
 
     s.side = DoubleSide

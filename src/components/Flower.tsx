@@ -1,7 +1,18 @@
 import { PerspectiveCamera } from "@react-three/drei"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { forwardRef, MutableRefObject, RefObject, Suspense, useEffect, useImperativeHandle, useRef } from "react"
-import { Camera, Color, DirectionalLight, Mesh, MeshPhongMaterial, Object3D, Quaternion, Vector2, Vector3 } from "three"
+import {
+  Camera,
+  Color,
+  DirectionalLight,
+  Mesh,
+  MeshPhongMaterial,
+  Object3D,
+  Quaternion,
+  TextureLoader,
+  Vector2,
+  Vector3,
+} from "three"
 import { FlowerSpawner } from "./FlowerSpawner"
 import { PetalStyleModel } from "./PetalModel"
 import { Stalk } from "./Stalk"
@@ -9,7 +20,6 @@ import { Stalk } from "./Stalk"
 import { useWindowSize } from "../hooks/useWindowSize"
 
 import { useThreejsObjects } from "../hooks/useThreejsObjects"
-import { getTextureFromImage } from "../utils/getTextureFromImage"
 import { DEG_TO_RAD } from "../utils/math"
 import { RegenerateRefType } from "../types/RegenerateRefType"
 import { usePointer } from "../hooks/usePointer"
@@ -135,13 +145,10 @@ const Flower = forwardRef<
     stamenDiscModelMesh.rotation.x = -90 * DEG_TO_RAD
     stamenDiscModelMesh.position.z = -stamenDiscOffsetZ
 
-    const stamenDiscImg = new Image()
-    stamenDiscImg.src = "/assets/stamendisk2.jpg"
-    const stamenDiscMap = getTextureFromImage(stamenDiscImg)
+    const textureLoader = new TextureLoader()
 
-    const stamenDiscNormalImg = new Image()
-    stamenDiscNormalImg.src = "/assets/stamendisk_normal.jpg"
-    const stamenDiscNormalMap = getTextureFromImage(stamenDiscNormalImg)
+    const stamenDiscMap = textureLoader.load("/assets/stamendisk2.jpg")
+    const stamenDiscNormalMap = textureLoader.load("/assets/stamendisk_normal.jpg")
 
     const material = new MeshPhongMaterial({
       color: new Color(petalStyleModel.current.hslToRgb(petalStyleModel.current.hue, 0.9, 0.86)),
@@ -182,10 +189,7 @@ const Flower = forwardRef<
       flowerSpawnerRef.current = new FlowerSpawner(flowerRef as MutableRefObject<Object3D>, petalStyleModel.current)
 
       // setup stamen
-      const stamenImage = new Image()
-      stamenImage.src = "/assets/stamen.png"
-
-      flowerSpawnerRef.current?.setStamenTexture(stamenImage)
+      flowerSpawnerRef.current?.setStamenTexture("/assets/stamen.png")
 
       // setup models
       flowerSpawnerRef.current.setGeometriesFromModels(

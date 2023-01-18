@@ -2,12 +2,11 @@
 /* eslint-disable class-methods-use-this */
 import { MutableRefObject } from "react"
 import seedrandom from "seedrandom"
-import { BufferGeometry, Material, Mesh, MeshBasicMaterial, Object3D } from "three"
+import { BufferGeometry, Material, Mesh, MeshBasicMaterial, Object3D, TextureLoader } from "three"
 import gsap, { Expo } from "gsap"
 import { DEG_TO_RAD } from "../utils/math"
 import { PetalStyleModel } from "./PetalModel"
 import { PetalObject } from "./PetalObject"
-import { getTextureFromImage } from "../utils/getTextureFromImage"
 
 type PetalProperties = {
   isStamen: boolean
@@ -46,6 +45,8 @@ export class FlowerSpawner {
 
   objectContainer: MutableRefObject<Object3D>
 
+  textureLoader = new TextureLoader()
+
   // geometries
   petalGeometries: BufferGeometry[] = []
 
@@ -55,7 +56,7 @@ export class FlowerSpawner {
   petalMaterial: Material | null = null
 
   // textures
-  stamenTexture: HTMLImageElement | null = null
+  stamenTexture: string | null = null
 
   // states
   generated = false
@@ -862,7 +863,7 @@ export class FlowerSpawner {
 
       // setup material
       if (petalProperties.isStamen && !this.usePetalTextureForStamen) {
-        const x = getTextureFromImage(this.stamenTexture!)
+        const x = this.textureLoader.load(this.stamenTexture!)
         petalProperties.petalMaterial = new MeshBasicMaterial({
           map: x,
           transparent: !1,
@@ -999,7 +1000,7 @@ export class FlowerSpawner {
     })
   }
 
-  public setStamenTexture(image: HTMLImageElement) {
+  public setStamenTexture(image: string) {
     this.stamenTexture = image
   }
 
