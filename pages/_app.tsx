@@ -7,6 +7,7 @@ import "../styles/globals.css"
 // eslint-disable-next-line camelcase
 import { Inter } from "@next/font/google"
 import { Cursor } from "../src/components/Cursor"
+import { bgColor } from "../src/constants/uiConstants"
 
 /* -------------------------------------------------------------------------- */
 /*                                    fonts                                   */
@@ -27,7 +28,8 @@ const Layout = (props: { children?: ReactNode | ReactNode[] }) => {
     <>
       {/* header */}
       <Head>
-        <title>Sujenphea</title>
+        <title>Sujen Phea</title>
+        <meta name="theme-color" content={bgColor} />
       </Head>
 
       {/* children */}

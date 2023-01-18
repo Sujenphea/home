@@ -58,7 +58,7 @@ export default function Loader() {
     <motion.div
       animate={{ opacity: 1, transition: { duration: 0.2 } }}
       exit={{ opacity: 0, transition: { duration: 0.4 } }}
-      className="fixed inset-0 flex items-center justify-center bg-slate-200"
+      className="fixed inset-0 flex items-center justify-center bg-bgColor"
       style={{
         zIndex: loaderZIndex,
       }}

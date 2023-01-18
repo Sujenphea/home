@@ -34,7 +34,7 @@ module.exports = {
       },
       colors: {
         contentColor: "#222",
-        bgColor: "#fff",
+        bgColor: "rgb(222, 227, 237)",
         black: {
           DEFAULT: "rgba(0, 0, 0, 1)",
           alpha50: "rgba(0, 0, 0, 0.5)",

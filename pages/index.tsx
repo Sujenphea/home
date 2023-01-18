@@ -1,5 +1,6 @@
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
+import gsap, { Power1 } from "gsap"
 import { FlowerCanvas } from "../src/components/Flower"
 import { HoverGradientText } from "../src/components/HoverGradientText"
 import Loader from "../src/components/Loader"
@@ -40,11 +41,9 @@ export default function Home() {
 
   /* ---------------------------------- refs ---------------------------------- */
   const flowerCanvasRef = useRef<RegenerateRefType | null>(null)
-
-  /* --------------------------- animation controls --------------------------- */
-  const titleAnimationControls = useAnimationControls()
-  const subheadingAnimationControls = useAnimationControls()
-  const socialMediaAnimationControls = useAnimationControls()
+  const titleRef = useRef<HTMLDivElement | null>(null)
+  const subheadingRef = useRef<HTMLDivElement | null>(null)
+  const socialMediaRef = useRef<HTMLDivElement | null>(null)
 
   /* --------------------------------- effects -------------------------------- */
   // initialise
@@ -59,55 +58,75 @@ export default function Home() {
   // animate
   useEffect(() => {
     if (imagesLoaded && !loading) {
-      ;(async () => {
-        setShowFlower(true)
+      setShowFlower(true)
 
-        await titleAnimationControls.start({
-          opacity: 1,
-          x: 0,
-          transition: {
-            duration: 0.6,
+      gsap
+        .timeline()
+
+        // title
+        .fromTo(
+          titleRef.current,
+          {
+            opacity: 0,
+            x: (windowWidth || 0) < 768 ? "0" : "15%",
+            y: (windowWidth || 0) < 768 ? "-20%" : 0,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 1,
             delay: 2.5,
-            type: "tween",
-            ease: "easeOut",
+            ease: Power1.easeOut,
+          }
+        )
+
+        // subheading
+        .fromTo(
+          subheadingRef.current,
+          {
+            opacity: 0,
+            x: (windowWidth || 0) < 768 ? "0" : "15%",
+            y: (windowWidth || 0) < 768 ? "-20%" : 0,
           },
-        })
-        await subheadingAnimationControls.start({
-          opacity: 1,
-          x: 0,
-          transition: {
-            duration: 0.6,
-            type: "tween",
-            ease: "easeOut",
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 1,
+            ease: Power1.easeOut,
           },
-        })
-        await socialMediaAnimationControls.start({
-          opacity: 1,
-          transition: {
-            duration: 0.5,
-            delay: 0.5,
-            type: "tween",
-            ease: "easeInOut",
+          "<0.5"
+        )
+
+        // social media
+        .fromTo(
+          socialMediaRef.current,
+          {
+            opacity: 0,
           },
-        })
-      })()
+          { opacity: 1, duration: 1 }
+        )
     }
-  }, [imagesLoaded, loading, socialMediaAnimationControls, subheadingAnimationControls, titleAnimationControls])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imagesLoaded, loading])
 
   /* --------------------------------- display -------------------------------- */
   const flowerDisplay = () => {
     return (
       <>
-        <div className="absolute inset-y-0 left-0 w-full translate-y-10 md:translate-y-0 lg:-translate-x-10">
-          <FlowerCanvas
-            ref={flowerCanvasRef}
-            isLoaded={showFlower}
-            windowWidth={windowWidth || 0}
-            windowHeight={windowHeight || 0}
-            pointerX={pointerX}
-            pointerY={pointerY}
-            pointerType={pointerType}
-          />
+        <div className="absolute inset-0 overflow-clip">
+          <div className="absolute inset-y-0 left-0 w-full translate-y-10 md:translate-y-0 lg:-translate-x-10">
+            <FlowerCanvas
+              ref={flowerCanvasRef}
+              isLoaded={showFlower}
+              windowWidth={windowWidth || 0}
+              windowHeight={windowHeight || 0}
+              pointerX={pointerX}
+              pointerY={pointerY}
+              pointerType={pointerType}
+            />
+          </div>
         </div>
 
         {/* bg overlay */}
@@ -134,10 +153,7 @@ export default function Home() {
       <div className="flex flex-col items-end gap-3">
         {/* heading */}
         <div className="relative overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, x: (windowWidth || 0) < 768 ? "0" : "100%" }}
-            animate={titleAnimationControls}
-          >
+          <div ref={titleRef}>
             {/* desktop */}
             <div className="hidden md:block">
               <HoverGradientText
@@ -153,29 +169,24 @@ export default function Home() {
             <div className="block md:hidden">
               <div className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide">Sujen Phea</div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* subheading + socail media */}
         <div className="relative overflow-hidden">
-          <motion.div
-            initial={{ opacity: 0, x: (windowWidth || 0) < 768 ? "0" : "100%" }}
-            animate={subheadingAnimationControls}
-          >
-            <div className="flex items-center gap-3">
-              <div className="text-xl text-black-alpha50 lg:text-2xl lg:font-medium">Web Developer</div>
+          <div className="flex items-center gap-3 opacity-0" ref={subheadingRef}>
+            <div className="text-xl text-black-alpha50 lg:text-2xl lg:font-medium">Web Developer</div>
 
-              {/* mobile social media -> cannot position at the bottom ... ios hides it ... */}
-              <a
-                className="relative block h-8 w-8 md:hidden"
-                href="https://github.com/sujenphea"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <IconGithub className="pointer-events-none h-full w-full" />
-              </a>
-            </div>
-          </motion.div>
+            {/* mobile social media -> cannot position at the bottom ... ios hides it ... */}
+            <a
+              className="relative block h-8 w-8 md:hidden"
+              href="https://github.com/sujenphea"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <IconGithub className="pointer-events-none h-full w-full" />
+            </a>
+          </div>
         </div>
       </div>
     )
@@ -187,7 +198,11 @@ export default function Home() {
       <AnimatePresence>{(!initialised || !imagesLoaded || loading) && <Loader />}</AnimatePresence>
 
       {/* flower */}
-      {initialised && <div className="absolute inset-0 bg-[rgba(210,219,243,0.5)]">{flowerDisplay()}</div>}
+      {initialised && (
+        <div className="absolute inset-0 bg-white">
+          <div className="absolute inset-0 bg-[rgba(210,219,243,0.5)]">{flowerDisplay()}</div>
+        </div>
+      )}
 
       <AnimatePresence>
         {initialised && (
@@ -204,12 +219,8 @@ export default function Home() {
             {/* content */}
             <div className="absolute right-10 top-10 md:top-20">{contentDisplay()}</div>
 
-            {/* desktop: socail media */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={socialMediaAnimationControls}
-              className="absolute bottom-10 left-10 hidden md:block"
-            >
+            {/* desktop: social media */}
+            <div className="absolute bottom-10 left-10 hidden opacity-0 md:block" ref={socialMediaRef}>
               <a
                 className="group relative block h-8 w-8 xl:h-10 xl:w-10"
                 href="https://github.com/sujenphea"
@@ -218,7 +229,7 @@ export default function Home() {
               >
                 <IconGithub className="pointer-events-none h-full w-full transition-transform group-hover:scale-90" />
               </a>
-            </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
