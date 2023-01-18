@@ -2,7 +2,6 @@
 import { motion } from "framer-motion"
 import { DetailedHTMLProps, HTMLAttributes, useState, useRef, useCallback } from "react"
 import useIntersectionObserver from "../hooks/useIntersectionObserver"
-import { useWindowSize } from "../hooks/useWindowSize"
 
 /**
  * @param hoverSpotlightRadius Relative to text container in percentage.
@@ -28,12 +27,10 @@ export const HoverGradientText = (
   const entry = useIntersectionObserver(containerRef, {})
   const isVisible = !!entry?.isIntersecting
 
-  const windowSize = useWindowSize()
-
   /* -------------------------------- callbacks ------------------------------- */
   const handleMove = useCallback(
     (e: React.MouseEvent) => {
-      if (isVisible && windowSize && containerRef.current) {
+      if (isVisible && containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect()
 
         const result = e.clientX - rect.left
@@ -41,7 +38,7 @@ export const HoverGradientText = (
         setmouseXPosition(`${result}px`)
       }
     },
-    [isVisible, windowSize, containerRef]
+    [isVisible, containerRef]
   )
 
   /* ---------------------------------- main ---------------------------------- */

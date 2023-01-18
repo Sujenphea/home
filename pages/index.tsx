@@ -7,6 +7,7 @@ import { useImages } from "../src/hooks/useImages"
 import { useWindowSize } from "../src/hooks/useWindowSize"
 import { IconGithub } from "../src/Icons/IconGithub"
 import { RegenerateRefType } from "../src/types/RegenerateRefType"
+import { usePointer } from "../src/hooks/usePointer"
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -29,7 +30,8 @@ const images = [
 /* -------------------------------------------------------------------------- */
 export default function Home() {
   const { loaded: imagesLoaded } = useImages(images)
-  const { width: windowWidth } = useWindowSize()
+  const { width: windowWidth, height: windowHeight } = useWindowSize()
+  const { x: pointerX, y: pointerY, pointerType } = usePointer()
 
   /* --------------------------------- states --------------------------------- */
   const [initialised, setInitialised] = useState(false)
@@ -97,7 +99,15 @@ export default function Home() {
     return (
       <>
         <div className="absolute inset-y-0 left-0 w-full translate-y-10 md:translate-y-0 lg:-translate-x-10">
-          <FlowerCanvas ref={flowerCanvasRef} isLoaded={showFlower} />
+          <FlowerCanvas
+            ref={flowerCanvasRef}
+            isLoaded={showFlower}
+            windowWidth={windowWidth || 0}
+            windowHeight={windowHeight || 0}
+            pointerX={pointerX}
+            pointerY={pointerY}
+            pointerType={pointerType}
+          />
         </div>
 
         {/* bg overlay */}

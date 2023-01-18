@@ -16,13 +16,9 @@ import {
 import { FlowerSpawner } from "./FlowerSpawner"
 import { PetalStyleModel } from "./PetalModel"
 import { Stalk } from "./Stalk"
-
-import { useWindowSize } from "../hooks/useWindowSize"
-
 import { useThreejsObjects } from "../hooks/useThreejsObjects"
 import { DEG_TO_RAD } from "../utils/math"
 import { RegenerateRefType } from "../types/RegenerateRefType"
-import { usePointer } from "../hooks/usePointer"
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -419,11 +415,17 @@ const Flower = forwardRef<
 })
 Flower.displayName = "Flower"
 
-export const FlowerCanvas = forwardRef<RegenerateRefType, { isLoaded: boolean }>((props, ref) => {
-  /* ---------------------------------- hooks --------------------------------- */
-  const { width: windowWidth, height: windowHeight } = useWindowSize()
-  const { x: pointerX, y: pointerY, pointerType } = usePointer()
-
+export const FlowerCanvas = forwardRef<
+  RegenerateRefType,
+  {
+    isLoaded: boolean
+    windowWidth: number
+    windowHeight: number
+    pointerX: number
+    pointerY: number
+    pointerType: string
+  }
+>((props, ref) => {
   /* ---------------------------------- refs ---------------------------------- */
   const cameraRef = useRef<Camera | null>(null)
   const cameraBoxRef = useRef<Object3D | null>(null)
@@ -451,7 +453,7 @@ export const FlowerCanvas = forwardRef<RegenerateRefType, { isLoaded: boolean }>
             ref={cameraRef}
             makeDefault
             fov={45}
-            aspect={(windowWidth || 0) / (windowHeight || 0)}
+            aspect={props.windowWidth / props.windowHeight}
             near={0.1}
             far={25e3}
             position={[0, 0, cameraDist]}
@@ -462,11 +464,11 @@ export const FlowerCanvas = forwardRef<RegenerateRefType, { isLoaded: boolean }>
       {/* flower */}
       <Flower
         ref={flowerRef}
-        windowWidth={windowWidth}
-        windowHeight={windowHeight}
-        pointerX={pointerX}
-        pointerY={pointerY}
-        pointerType={pointerType}
+        windowWidth={props.windowWidth}
+        windowHeight={props.windowHeight}
+        pointerX={props.pointerX}
+        pointerY={props.pointerY}
+        pointerType={props.pointerType}
         cameraRef={cameraRef}
         cameraBoxInnerRef={cameraBoxInnerRef}
         cameraBoxRef={cameraBoxRef}
