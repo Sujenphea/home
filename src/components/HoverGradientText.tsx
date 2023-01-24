@@ -44,7 +44,7 @@ export const HoverGradientText = (
   /* ---------------------------------- main ---------------------------------- */
   return (
     <div
-      className={`grid ${className}`}
+      className="grid"
       ref={containerRef}
       onMouseMove={handleMove}
       onMouseEnter={() => {
@@ -67,7 +67,7 @@ export const HoverGradientText = (
             ease: "linear",
           },
         }}
-        className="pointer-events-none select-none"
+        className={`pointer-events-none select-none ${className}`}
         style={{
           gridArea: "1 / 1",
           color: "transparent",
@@ -86,7 +86,7 @@ export const HoverGradientText = (
 
       {/* spotlight effect */}
       <div
-        className="pointer-events-none"
+        className={`pointer-events-none ${className}`}
         style={{
           gridArea: "1 / 1",
           color: "transparent",
@@ -112,7 +112,7 @@ export const HoverGradientText = (
             ease: "linear",
           },
         }}
-        className="pointer-events-none select-none transition-opacity duration-500 ease-linear"
+        className={`pointer-events-none select-none transition-opacity duration-500 ease-linear ${className}`}
         style={{
           opacity: hovering ? 0 : 1,
           gridArea: "1 / 1",

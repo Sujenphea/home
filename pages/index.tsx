@@ -158,8 +158,8 @@ export default function Home() {
             <div className="hidden md:block">
               <HoverGradientText
                 nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
-                hoverGradient="linear-gradient(90deg, rgba(50,80,120,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,120,1) 100%)"
-                className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide md:text-7xl lg:text-[92px]"
+                hoverGradient="linear-gradient(90deg, rgba(50,80,160,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,160,1) 100%)"
+                className="whitespace-nowrap pl-6 pr-3 text-right font-heading text-[72px] font-bold lowercase leading-normal tracking-wide lg:text-[124px]"
               >
                 Sujen Phea
               </HoverGradientText>
@@ -167,15 +167,17 @@ export default function Home() {
 
             {/* mobile */}
             <div className="block md:hidden">
-              <div className="whitespace-nowrap text-right text-5xl font-bold uppercase tracking-wide">Sujen Phea</div>
+              <div className="whitespace-nowrap pl-6 pr-3 text-right font-heading text-[60px] font-bold lowercase tracking-wide">
+                Sujen Phea
+              </div>
             </div>
           </div>
         </div>
 
         {/* subheading + socail media */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden pr-6">
           <div className="flex items-center gap-3 opacity-0" ref={subheadingRef}>
-            <div className="text-xl text-black-alpha50 lg:text-2xl lg:font-medium">Web Developer</div>
+            <div className="text-lg uppercase text-black-alpha50 md:text-xl lg:text-2xl">Web Developer</div>
 
             {/* mobile social media -> cannot position at the bottom ... ios hides it ... */}
             <a

@@ -5,17 +5,28 @@ import { ReactNode } from "react"
 import "../styles/globals.css"
 
 // eslint-disable-next-line camelcase
-import { Inter } from "@next/font/google"
+import localFont from "@next/font/local"
+
 import { Cursor } from "../src/components/Cursor"
 import { bgColor } from "../src/constants/uiConstants"
 
 /* -------------------------------------------------------------------------- */
 /*                                    fonts                                   */
 /* -------------------------------------------------------------------------- */
-export const interFont = Inter({
-  weight: "variable",
-  subsets: ["latin", "latin-ext"],
-  variable: "--inter",
+export const guardianSnowingFont = localFont({
+  src: [{ path: "../public/fonts/GuardianSnowing.ttf", weight: "400" }],
+  variable: "--guardian-snowing",
+  display: "swap",
+})
+
+export const azoSansFont = localFont({
+  src: [
+    { path: "../public/fonts/AzoSans-Thin.woff2", weight: "100" },
+    { path: "../public/fonts/AzoSans-Light.woff2", weight: "300" },
+    { path: "../public/fonts/AzoSans-Regular.woff2", weight: "400" },
+    { path: "../public/fonts/AzoSans-Medium.woff2", weight: "500" },
+  ],
+  variable: "--azo-sans",
   display: "swap",
 })
 
