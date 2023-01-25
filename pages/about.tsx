@@ -19,7 +19,7 @@ const timelineItems: {
     id: 0,
     role: "Bachelor's degree, Computer Science",
     company: "University of Auckland",
-    description: [],
+    description: ["GPA: 8.3/9.0", "Stack - Python, Javascript, Java, C++"],
     startDate: "June 2020",
     endDate: "December 2022",
   },
@@ -28,17 +28,21 @@ const timelineItems: {
     role: "Developer",
     company: "Umajin Inc.",
     description: [
-      "Developed features for the in-house mobile application design and deployment app.",
-      "Co-developed a software platform using the in-house software language.",
+      "Developed accessibility features for the in-house mobile application design and deployment application",
+      "Co-developed a proprietary cloud server for storage using the in-house software language",
+      "Stack - Umajin Language, HTML, CSS",
     ],
     startDate: "November 2021",
     endDate: "June 2022",
   },
   {
     id: 2,
-    role: "Freelance",
+    role: "Freelance Frontend Developer",
     company: "Web development",
-    description: ["Collaborated closely with UI/UX designers to develop interactive websites for clients."],
+    description: [
+      "Collaborated closely with UI/UX designers to develop interactive websites for clients.",
+      "Stack - NextJS / React, Typescript, ThreeJS",
+    ],
     startDate: "October 2022",
     endDate: "Current",
   },
@@ -47,13 +51,13 @@ const timelineItems: {
 /**
  * skillLevel in percentage
  */
-const technologyItems: {
+const stackItems: {
   id: number
   name: string
   skillLevel: number
 }[] = [
-  { id: 0, name: "NextJS", skillLevel: 1 },
-  { id: 1, name: "Typescript", skillLevel: 1 },
+  { id: 0, name: "NextJS / React", skillLevel: 1 },
+  { id: 1, name: "TS / JS", skillLevel: 1 },
   { id: 2, name: "ThreeJS", skillLevel: 0.9 },
   { id: 3, name: "Python", skillLevel: 0.9 },
   { id: 4, name: "Swift", skillLevel: 0.8 },
@@ -124,14 +128,14 @@ const Skills = () => {
         {/* title */}
         <div className="flex items-center gap-5">
           <div className="h-px w-full bg-slate-500" />
-          <div>Technologies</div>
+          <div>Stack</div>
           <div className="h-px w-full bg-slate-500" />
         </div>
 
         {/* content */}
         <div className="mt-8">
           <div className="flex flex-col gap-7">
-            {technologyItems.map((item) => {
+            {stackItems.map((item) => {
               return (
                 <div key={`technologies ${item.id}`}>
                   {/* title */}
