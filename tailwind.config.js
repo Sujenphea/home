@@ -46,6 +46,15 @@ module.exports = {
           DEFAULT: "hsl(208deg, 41%, 60%)",
         },
       },
+      keyframes: {
+        pulseScale: {
+          "0%": { transform: "scale(0)", opacity: 1 },
+          "100%": { transform: "scale(1)", opacity: 0 },
+        },
+      },
+      animation: {
+        pulseScale: "pulseScale 1s ease-in-out infinite",
+      },
     },
   },
 }

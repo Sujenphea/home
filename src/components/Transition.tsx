@@ -5,18 +5,6 @@ import { ReactNode, useEffect, useState } from "react"
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
 /* -------------------------------------------------------------------------- */
-// const pulseAnimation = keyframes`
-//   0% {
-//     transform: translate(-50%, -50%) scale(0);
-//     opacity: 1;
-//   }
-//   100% {
-//     -webkit-transform: translate(-50%, -50%) scale(1);
-//     transform: translate(-50%, -50%) scale(1);
-//     opacity: 0;
-//   }
-// `
-
 type LoadingStates = "none" | "loading" | "loaded" | "returnLoading" | "returnLoaded"
 
 /* -------------------------------------------------------------------------- */
@@ -55,24 +43,23 @@ const LoadingAnimation = (input: { state?: LoadingStates }) => {
     <div>
       {/* black bg */}
       <div
-        className="fixed inset-0 z-[500] bg-black duration-[400ms]"
+        className="fixed inset-0 z-[500] bg-blue-200 duration-[400ms]"
         style={{
           transitionDelay: transformAnimation.black,
-          background: "black",
           transform: transformAnimation.translate,
         }}
       />
 
       {/* red bg */}
       <div
-        className="fixed inset-0 z-[500] bg-red-500 duration-[400ms]"
+        className="fixed inset-0 z-[500] bg-bgColor duration-[400ms]"
         style={{
           transitionDelay: transformAnimation.red,
           transform: transformAnimation.translate,
         }}
       >
         {/* circle in loading mode */}
-        <div className="absolute top-1/2 left-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-white" />
+        <div className="absolute top-1/2 left-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 animate-pulseScale rounded-full bg-slate-400" />
       </div>
     </div>
   )
