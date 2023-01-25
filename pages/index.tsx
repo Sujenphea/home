@@ -150,7 +150,7 @@ export default function Home() {
 
   const contentDisplay = () => {
     return (
-      <div className="flex flex-col items-end gap-3">
+      <div className="flex flex-col items-end gap-1">
         {/* heading */}
         <div className="relative overflow-hidden">
           <div ref={titleRef}>
@@ -159,7 +159,7 @@ export default function Home() {
               <HoverGradientText
                 nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
                 hoverGradient="linear-gradient(90deg, rgba(50,80,160,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,160,1) 100%)"
-                className="whitespace-nowrap pl-6 pr-3 text-right font-heading text-[72px] font-bold lowercase leading-normal tracking-wide lg:text-[124px]"
+                className="whitespace-nowrap pl-6 pr-3 text-right font-heading text-[72px] font-extralight lowercase leading-normal tracking-wide lg:text-[84px]"
               >
                 Sujen Phea
               </HoverGradientText>
@@ -175,19 +175,23 @@ export default function Home() {
         </div>
 
         {/* subheading + socail media */}
-        <div className="relative overflow-hidden pr-6">
+        <div className="relative pr-6 lg:overflow-x-hidden">
           <div className="flex items-center gap-3 opacity-0" ref={subheadingRef}>
-            <div className="text-lg uppercase text-black-alpha50 md:text-xl lg:text-2xl">Web Developer</div>
+            <div className="text-lg uppercase text-black-alpha50 opacity-[0.45] md:text-xl md:font-bold lg:text-2xl">
+              Web Developer
+            </div>
 
             {/* mobile social media -> cannot position at the bottom ... ios hides it ... */}
-            <a
-              className="relative block h-8 w-8 md:hidden"
-              href="https://github.com/sujenphea"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <IconGithub className="pointer-events-none h-full w-full" />
-            </a>
+            <div className="relative top-[-4px]">
+              <a
+                className="block h-8 w-8 md:hidden"
+                href="https://github.com/sujenphea"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <IconGithub className="pointer-events-none h-full w-full" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
