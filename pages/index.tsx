@@ -147,22 +147,64 @@ export default function Home() {
         <div className="relative ">
           <div ref={titleRef}>
             {/* desktop */}
-            <div className="hidden md:block">
-              <HoverGradientText
-                nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
-                hoverGradient="linear-gradient(90deg, rgba(50,80,160,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,160,1) 100%)"
-                className="whitespace-nowrap pl-6 pr-3 text-right font-heading text-[72px] font-extralight lowercase leading-normal tracking-wide lg:text-[84px]"
-              >
-                Sujen Phea
-              </HoverGradientText>
-
-              {/* link to about me */}
+            <motion.div
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+              variants={{
+                rest: {
+                  scale: 1,
+                  transition: {
+                    duration: 0.3,
+                  },
+                },
+                hover: {
+                  scale: 0.98,
+                  transition: {
+                    duration: 0.3,
+                  },
+                },
+              }}
+              className="hidden md:block"
+            >
               <Link href="/about">
-                <div className="absolute right-0 top-0 h-8 w-8 translate-x-[50%] translate-y-[10%] cursor-pointer duration-200 ease-in-out hover:scale-75 hover:opacity-80 md:cursor-none">
-                  <IconArrowRight width="100%" height="100%" className="-rotate-45" />
+                <HoverGradientText
+                  nonHoverGradient="linear-gradient(90deg, rgba(33,49,67,1) 0%, rgba(40,83,131,1) 10%, rgba(33,49,67,1) 20%)"
+                  hoverGradient="linear-gradient(90deg, rgba(50,80,160,1) 0%, rgba(40,80,130,1) 50%, rgba(50,80,160,1) 100%)"
+                  className="whitespace-nowrap pl-6 pr-3 text-right font-heading text-[72px] font-extralight lowercase leading-normal tracking-wide lg:text-[84px]"
+                >
+                  Sujen Phea
+                </HoverGradientText>
+
+                {/* link to about me */}
+
+                <div className="absolute right-0 top-0 h-8 w-8 translate-x-[50%] translate-y-[10%] cursor-pointer duration-200 ease-in-out md:cursor-none">
+                  <motion.div
+                    variants={{
+                      rest: {
+                        translateX: 0,
+                        translateY: 0,
+                      },
+                      hover: {
+                        translateX: [0, 6, 0],
+                        translateY: [0, -3, 0],
+                        scale: [0.8, 0.8, 0.8],
+                        transition: {
+                          times: [0, 0.5, 1],
+                          duration: 0.5,
+                          repeatDelay: 1,
+                          repeat: Infinity,
+                          repeatType: "mirror",
+                          ease: "easeInOut",
+                        },
+                      },
+                    }}
+                  >
+                    <IconArrowRight width="100%" height="100%" className="-rotate-45" />
+                  </motion.div>
                 </div>
               </Link>
-            </div>
+            </motion.div>
 
             {/* mobile */}
             <div className="md:hidden">
