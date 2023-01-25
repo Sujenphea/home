@@ -178,60 +178,62 @@ export default function About() {
         </div>
 
         {/* content */}
-        {timelineItems.reverse().map((item) => {
-          return (
-            <div key={`timline ${item.id}`} className="border-l border-slate-300">
-              {/* date */}
-              <div className="flex items-center gap-5">
-                {/* ball */}
-                <div className="relative left-[-6px] h-3 w-3 rounded-full bg-slate-500 " />
-
+        <div className="flex flex-col-reverse">
+          {timelineItems.map((item) => {
+            return (
+              <div key={`timline ${item.id}`} className="border-l border-slate-300">
                 {/* date */}
-                <div className="flex gap-2 text-sm uppercase opacity-75">
-                  <div>{item.startDate}</div>
-                  <div>-</div>
-                  <div>{item.endDate}</div>
-                </div>
-              </div>
+                <div className="flex items-center gap-5">
+                  {/* ball */}
+                  <div className="relative left-[-6px] h-3 w-3 rounded-full bg-slate-500 " />
 
-              {/* content */}
-              <div className="pt-2 pb-10 pl-16">
-                {/* role */}
-                <div className="text-lg font-medium uppercase">{item.role}</div>
-
-                {/* company */}
-                {item.company.length > 0 && (
-                  <div className="mt-1">
-                    <div className="text-sm opacity-75">{item.company}</div>
+                  {/* date */}
+                  <div className="flex gap-2 text-sm uppercase opacity-75">
+                    <div>{item.startDate}</div>
+                    <div>-</div>
+                    <div>{item.endDate}</div>
                   </div>
-                )}
+                </div>
 
-                {/* description */}
-                <div className="mt-3 max-w-[80%] font-light">
-                  {item.description.length > 1
-                    ? // bulletpoint
-                      item.description.map((bulletpoint, id) => {
-                        return (
-                          <div
-                            // eslint-disable-next-line react/no-array-index-key
-                            key={`timeline ${item.id}, ${id}`}
-                            className="relative flex gap-2"
-                          >
-                            {/* bullet */}
-                            <div>•</div>
+                {/* content */}
+                <div className="pt-2 pb-10 pl-16">
+                  {/* role */}
+                  <div className="text-lg font-medium uppercase">{item.role}</div>
 
-                            {/* text */}
-                            <div>{bulletpoint}</div>
-                          </div>
-                        )
-                      })
-                    : // paragraph
-                      item.description}
+                  {/* company */}
+                  {item.company.length > 0 && (
+                    <div className="mt-1">
+                      <div className="text-sm opacity-75">{item.company}</div>
+                    </div>
+                  )}
+
+                  {/* description */}
+                  <div className="mt-3 max-w-[80%] font-light">
+                    {item.description.length > 1
+                      ? // bulletpoint
+                        item.description.map((bulletpoint, id) => {
+                          return (
+                            <div
+                              // eslint-disable-next-line react/no-array-index-key
+                              key={`timeline ${item.id}, ${id}`}
+                              className="relative flex gap-2"
+                            >
+                              {/* bullet */}
+                              <div>•</div>
+
+                              {/* text */}
+                              <div>{bulletpoint}</div>
+                            </div>
+                          )
+                        })
+                      : // paragraph
+                        item.description}
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     )
   }
