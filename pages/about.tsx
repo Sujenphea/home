@@ -1,6 +1,7 @@
 import { IconX } from "@tabler/icons"
+import { animate } from "framer-motion"
 import Link from "next/link"
-import { DetailedHTMLProps, HTMLAttributes } from "react"
+import { DetailedHTMLProps, HTMLAttributes, useEffect, useState } from "react"
 import { brandColor, maxPageWidth, pageSidePadding } from "../src/constants/uiConstants"
 
 /* -------------------------------------------------------------------------- */
@@ -83,6 +84,68 @@ const FullPageDisplay = (props: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>
         {...rest}
       >
         {children}
+      </div>
+    </div>
+  )
+}
+
+const AnimatedLine = (props: { filledPercentage?: number; currentFill?: number }) => {
+  return (
+    <div
+      className="h-[2px] w-full"
+      style={{
+        backgroundImage: `linear-gradient(to right, ${brandColor} ${
+          ((props.filledPercentage || 1) / 2) * 100
+        }%, white ${((props.filledPercentage || 1) / 2 + 0.001) * 100}%)`,
+        backgroundSize: "200% 100%",
+        backgroundPosition: `${props.currentFill || 0}% 0%`,
+      }}
+    />
+  )
+}
+
+const Skills = () => {
+  const [gradientXPosition, setGradientXPosition] = useState(100)
+
+  /* --------------------------------- effects -------------------------------- */
+  // animate from 100 to 0
+  useEffect(() => {
+    animate(100, 0, {
+      duration: 1,
+      delay: 0.5,
+      onUpdate: (latest) => setGradientXPosition(latest),
+    })
+  }, [])
+
+  return (
+    <div>
+      {/* technologies */}
+      <div>
+        {/* title */}
+        <div className="flex items-center gap-5">
+          <div className="h-px w-full bg-slate-500" />
+          <div>Technologies</div>
+          <div className="h-px w-full bg-slate-500" />
+        </div>
+
+        {/* content */}
+        <div className="mt-8">
+          <div className="flex flex-col gap-7">
+            {technologyItems.map((item) => {
+              return (
+                <div key={`technologies ${item.id}`}>
+                  {/* title */}
+                  <div className="text-sm font-medium uppercase">{item.name}</div>
+
+                  {/* non interactive slider */}
+                  <div className="mt-3">
+                    <AnimatedLine filledPercentage={item.skillLevel} currentFill={gradientXPosition} />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -173,73 +236,33 @@ export default function About() {
     )
   }
 
-  const skillsDisplay = () => {
-    return (
-      <div>
-        {/* technologies */}
-        <div>
-          {/* title */}
-          <div className="flex items-center gap-5">
-            <div className="h-px w-full bg-slate-500" />
-            <div>Technologies</div>
-            <div className="h-px w-full bg-slate-500" />
-          </div>
-
-          {/* content */}
-          <div className="mt-8">
-            <div className="flex flex-col gap-7">
-              {technologyItems.map((item) => {
-                return (
-                  <div key={`technologies ${item.id}`}>
-                    {/* title */}
-                    <div className="text-sm font-medium uppercase">{item.name}</div>
-
-                    {/* non interactive slider */}
-                    <div className="mt-3">
-                      <div
-                        className="h-[2px] w-full"
-                        style={{
-                          backgroundImage: `linear-gradient(to right, ${brandColor} ${item.skillLevel * 100}%, white ${
-                            (item.skillLevel + 0.001) * 100
-                          }%)`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   /* ---------------------------------- main ---------------------------------- */
   return (
-    <FullPageDisplay>
+    <FullPageDisplay className="z-[0]">
       {/* button */}
-      <div className="mt-3">
-        <div className="flex justify-center">
-          <Link href="/" className="rounded-full bg-gray-50 p-4">
+      <div className="fixed left-1/2 top-4 z-[1] h-14 w-14 -translate-x-1/2">
+        <div className="flex h-full items-center justify-center rounded-full bg-slate-50 bg-opacity-70 duration-300 ease-in-out hover:scale-90">
+          <Link href="/">
             <IconX className="h-5 w-5 text-slate-500" />
           </Link>
         </div>
       </div>
 
       {/* heading */}
-      <div className="mt-10">
-        <div className="text-center text-4xl font-bold">Resume</div>
+      <div className="mt-24">
+        <div className="text-center text-[34px] font-bold uppercase">Resume</div>
       </div>
 
       {/* content */}
-      <div className="mt-32">
-        <div className="grid h-20 grid-cols-[60%_40%] pt-16">
+      <div className="mt-16 mb-10">
+        <div className="grid gap-20 pt-16 md:grid-cols-[60%_40%] md:gap-0">
           {/* left */}
           <div>{timelineDisplay()}</div>
 
           {/* right */}
-          <div>{skillsDisplay()}</div>
+          <div>
+            <Skills />
+          </div>
         </div>
       </div>
     </FullPageDisplay>
