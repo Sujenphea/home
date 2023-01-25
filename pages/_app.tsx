@@ -9,6 +9,7 @@ import localFont from "@next/font/local"
 
 import { Cursor } from "../src/components/Cursor"
 import { bgColor } from "../src/constants/uiConstants"
+import Transition from "../src/components/Transition"
 
 /* -------------------------------------------------------------------------- */
 /*                                    fonts                                   */
@@ -63,9 +64,11 @@ const Layout = (props: { children?: ReactNode | ReactNode[] }) => {
 /* -------------------------------------------------------------------------- */
 export default function MyApp(props: AppProps) {
   return (
-    <Layout>
-      {/* main */}
-      <props.Component {...props.pageProps} />
-    </Layout>
+    <Transition>
+      <Layout>
+        {/* main */}
+        <props.Component {...props.pageProps} />
+      </Layout>
+    </Transition>
   )
 }

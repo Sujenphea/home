@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import gsap, { Power1 } from "gsap"
+import Link from "next/link"
+import { IconArrowRight } from "@tabler/icons"
 import { FlowerCanvas } from "../src/components/Flower"
 import { HoverGradientText } from "../src/components/HoverGradientText"
 import Loader from "../src/components/Loader"
@@ -43,6 +45,7 @@ export default function Home() {
   const flowerCanvasRef = useRef<RegenerateRefType | null>(null)
   const titleRef = useRef<HTMLDivElement | null>(null)
   const subheadingRef = useRef<HTMLDivElement | null>(null)
+  const aboutLinkRef = useRef<HTMLAnchorElement | null>(null)
   const socialMediaRef = useRef<HTMLDivElement | null>(null)
 
   /* --------------------------------- effects -------------------------------- */
@@ -96,7 +99,25 @@ export default function Home() {
             duration: 1,
             ease: Power1.easeOut,
           },
-          "<0.5"
+          "<0.3"
+        )
+
+        // about me link
+        .fromTo(
+          aboutLinkRef.current,
+          {
+            opacity: 0,
+            x: (windowWidth || 0) < 768 ? "0" : "15%",
+            y: (windowWidth || 0) < 768 ? "-20%" : 0,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 1,
+            ease: Power1.easeOut,
+          },
+          "<0.3"
         )
 
         // social media
@@ -152,7 +173,7 @@ export default function Home() {
     return (
       <div className="flex flex-col items-end gap-1">
         {/* heading */}
-        <div className="relative overflow-hidden">
+        <div className="relative ">
           <div ref={titleRef}>
             {/* desktop */}
             <div className="hidden md:block">
@@ -163,18 +184,33 @@ export default function Home() {
               >
                 Sujen Phea
               </HoverGradientText>
+
+              {/* link to about me */}
+              <Link href="/about">
+                <div className="absolute right-0 top-0 h-8 w-8 translate-x-[50%] translate-y-[10%] cursor-pointer duration-200 ease-in-out hover:scale-75 hover:opacity-80 md:cursor-none">
+                  <IconArrowRight width="100%" height="100%" className="-rotate-45" />
+                </div>
+              </Link>
             </div>
 
             {/* mobile */}
-            <div className="block md:hidden">
+            <div className="md:hidden">
+              {/* text */}
               <div className="whitespace-nowrap pl-6 pr-3 text-right font-heading text-[60px] font-bold lowercase tracking-wide">
                 Sujen Phea
               </div>
+
+              {/* link to about me */}
+              <Link href="/about">
+                <div className="absolute right-0 top-0 h-6 w-6 translate-x-[50%] cursor-pointer duration-200 ease-in-out hover:scale-75 hover:opacity-80 md:cursor-none">
+                  <IconArrowRight width="100%" height="100%" className="-rotate-45" />
+                </div>
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* subheading + socail media */}
+        {/* subheading + social media */}
         <div className="relative pr-6 lg:overflow-x-hidden">
           <div className="flex items-center gap-3 opacity-0" ref={subheadingRef}>
             <div className="text-lg uppercase text-black-alpha50 opacity-[0.45] md:text-xl md:font-bold lg:text-2xl">

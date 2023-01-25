@@ -1,4 +1,5 @@
 import { IconX } from "@tabler/icons"
+import Link from "next/link"
 import { DetailedHTMLProps, HTMLAttributes } from "react"
 import { brandColor, maxPageWidth, pageSidePadding } from "../src/constants/uiConstants"
 
@@ -36,7 +37,7 @@ const timelineItems: {
     id: 2,
     role: "Freelance",
     company: "Web development",
-    description: ["Collaborated closely with designers to develop interactive websites for clients."],
+    description: ["Collaborated closely with UI/UX designers to develop interactive websites for clients."],
     startDate: "October 2022",
     endDate: "Current",
   },
@@ -220,9 +221,9 @@ export default function About() {
       {/* button */}
       <div className="mt-3">
         <div className="flex justify-center">
-          <div className="rounded-full bg-gray-50 p-4">
+          <Link href="/" className="rounded-full bg-gray-50 p-4">
             <IconX className="h-5 w-5 text-slate-500" />
-          </div>
+          </Link>
         </div>
       </div>
 
