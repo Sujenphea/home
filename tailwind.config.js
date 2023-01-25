@@ -42,6 +42,9 @@ module.exports = {
           DEFAULT: "rgba(0, 0, 0, 1)",
           alpha50: "rgba(0, 0, 0, 0.5)",
         },
+        brand: {
+          DEFAULT: "hsl(208deg, 41%, 60%)",
+        },
       },
     },
   },

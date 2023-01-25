@@ -1,10 +1,14 @@
 /* -------------------------------------------------------------------------- */
 /*                                    page                                    */
 /* -------------------------------------------------------------------------- */
-export const maxPageWidth = "1000px"
-export const pageSidePadding = "16px"
+export const maxPageWidth = "1200px"
+export const pageSidePadding = "48px"
 
 export const loaderZIndex = 10
 export const cursorZIndex = 100
 
+/* -------------------------------------------------------------------------- */
+/*                                   colours                                  */
+/* -------------------------------------------------------------------------- */
 export const bgColor = "rgb(222, 227, 237)"
+export const brandColor = "hsl(208deg, 41%, 60%)"
