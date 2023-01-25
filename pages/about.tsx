@@ -93,9 +93,9 @@ export default function About() {
   /* -------------------------------- displays -------------------------------- */
   const timelineDisplay = () => {
     return (
-      <div>
+      <div className="relative">
         {/* decoration  */}
-        <div className="absolute bottom-0 flex flex-col">
+        <div className="absolute top-0 flex -translate-y-full flex-col">
           {/* content */}
           <div className="relative -left-8 flex items-center gap-8">
             {/* circle */}
