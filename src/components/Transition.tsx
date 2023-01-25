@@ -5,6 +5,7 @@ import Image from "next/image"
 
 import glasses from "../../public/assets/glasses.svg"
 import { useImages } from "../hooks/useImages"
+import { loaderZIndex } from "../constants/uiConstants"
 
 /* -------------------------------------------------------------------------- */
 /*                                  constants                                 */
@@ -113,8 +114,9 @@ const LoadingAnimation = (input: { state?: LoadingStates; initialLoading?: boole
     <div>
       {/* transition bg */}
       <div
-        className="fixed inset-0 z-[500] bg-blue-200 duration-[400ms]"
+        className="fixed inset-0 bg-blue-200 duration-[400ms]"
         style={{
+          zIndex: loaderZIndex,
           transitionDelay: transformAnimation.transitionBg,
           transform: transformAnimation.translate,
         }}
@@ -122,8 +124,9 @@ const LoadingAnimation = (input: { state?: LoadingStates; initialLoading?: boole
 
       {/* main bg */}
       <div
-        className="fixed inset-0 z-[500] bg-bgColor duration-[400ms]"
+        className="fixed inset-0 bg-bgColor duration-[400ms]"
         style={{
+          zIndex: loaderZIndex,
           transitionDelay: transformAnimation.mainBg,
           transform: transformAnimation.translate,
         }}
@@ -207,13 +210,13 @@ export default function Transition(input: { children?: ReactNode }) {
       if (loading === "returnLoading") {
         setTimeout(() => {
           setLoading("returnLoaded")
-        }, 800)
+        }, 400)
       }
       // other navigations
       else if (url === asPath) {
         setTimeout(() => {
           setLoading("loaded")
-        }, 1000)
+        }, 400)
       }
     }
 
