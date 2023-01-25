@@ -5,40 +5,19 @@ import Link from "next/link"
 import { IconArrowRight } from "@tabler/icons"
 import { FlowerCanvas } from "../src/components/Flower"
 import { HoverGradientText } from "../src/components/HoverGradientText"
-import Loader from "../src/components/Loader"
-import { useImages } from "../src/hooks/useImages"
 import { useWindowSize } from "../src/hooks/useWindowSize"
 import { IconGithub } from "../src/Icons/IconGithub"
 import { RegenerateRefType } from "../src/types/RegenerateRefType"
 import { usePointer } from "../src/hooks/usePointer"
 
 /* -------------------------------------------------------------------------- */
-/*                                  constants                                 */
-/* -------------------------------------------------------------------------- */
-const images = [
-  "./assets/petalB_1.jpg",
-  "./assets/petal1_4.jpg",
-  "./assets/petal1_5.jpg",
-  "./assets/petal3_1.jpg",
-  "./assets/petal4_2.jpg",
-  "./assets/petal1_specular.png",
-  "./assets/peta1_normal.png",
-  "./assets/stamen.png",
-  "./assets/stamendisk_normal.jpg",
-  "./assets/stamendisk2.jpg",
-]
-
-/* -------------------------------------------------------------------------- */
 /*                                    main                                    */
 /* -------------------------------------------------------------------------- */
 export default function Home() {
-  const { loaded: imagesLoaded } = useImages(images)
   const { width: windowWidth, height: windowHeight } = useWindowSize()
   const { x: pointerX, y: pointerY, pointerType } = usePointer()
 
   /* --------------------------------- states --------------------------------- */
-  const [initialised, setInitialised] = useState(false)
-  const [loading, setLoading] = useState(true) // minimum loading timeout
   const [showFlower, setShowFlower] = useState(false)
 
   /* ---------------------------------- refs ---------------------------------- */
@@ -49,88 +28,80 @@ export default function Home() {
   const socialMediaRef = useRef<HTMLDivElement | null>(null)
 
   /* --------------------------------- effects -------------------------------- */
-  // initialise
-  useEffect(() => {
-    setInitialised(true)
-
-    setTimeout(() => {
-      setLoading(false)
-    }, 2e3)
-  }, [])
-
   // animate
   useEffect(() => {
-    if (imagesLoaded && !loading) {
-      setShowFlower(true)
+    // if (imagesLoaded && !loading) {
+    setShowFlower(true)
 
-      gsap
-        .timeline()
+    gsap
+      .timeline()
 
-        // title
-        .fromTo(
-          titleRef.current,
-          {
-            opacity: 0,
-            x: (windowWidth || 0) < 768 ? "0" : "15%",
-            y: (windowWidth || 0) < 768 ? "-20%" : 0,
-          },
-          {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            duration: 1,
-            delay: 2.5,
-            ease: Power1.easeOut,
-          }
-        )
+      // title
+      .fromTo(
+        titleRef.current,
+        {
+          opacity: 0,
+          x: (windowWidth || 0) < 768 ? "0" : "15%",
+          y: (windowWidth || 0) < 768 ? "-20%" : 0,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          duration: 1,
+          delay: 2.5,
+          ease: Power1.easeOut,
+        }
+      )
 
-        // subheading
-        .fromTo(
-          subheadingRef.current,
-          {
-            opacity: 0,
-            x: (windowWidth || 0) < 768 ? "0" : "15%",
-            y: (windowWidth || 0) < 768 ? "-20%" : 0,
-          },
-          {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            duration: 1,
-            ease: Power1.easeOut,
-          },
-          "<0.3"
-        )
+      // subheading
+      .fromTo(
+        subheadingRef.current,
+        {
+          opacity: 0,
+          x: (windowWidth || 0) < 768 ? "0" : "15%",
+          y: (windowWidth || 0) < 768 ? "-20%" : 0,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          duration: 1,
+          ease: Power1.easeOut,
+        },
+        "<0.3"
+      )
 
-        // about me link
-        .fromTo(
-          aboutLinkRef.current,
-          {
-            opacity: 0,
-            x: (windowWidth || 0) < 768 ? "0" : "15%",
-            y: (windowWidth || 0) < 768 ? "-20%" : 0,
-          },
-          {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            duration: 1,
-            ease: Power1.easeOut,
-          },
-          "<0.3"
-        )
+      // about me link
+      .fromTo(
+        aboutLinkRef.current,
+        {
+          opacity: 0,
+          x: (windowWidth || 0) < 768 ? "0" : "15%",
+          y: (windowWidth || 0) < 768 ? "-20%" : 0,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          duration: 1,
+          ease: Power1.easeOut,
+        },
+        "<0.3"
+      )
 
-        // social media
-        .fromTo(
-          socialMediaRef.current,
-          {
-            opacity: 0,
-          },
-          { opacity: 1, duration: 1 }
-        )
-    }
+      // social media
+      .fromTo(
+        socialMediaRef.current,
+        {
+          opacity: 0,
+        },
+        { opacity: 1, duration: 1 }
+      )
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imagesLoaded, loading])
+    // }, [imagesLoaded, loading])
+  }, [windowWidth])
 
   /* --------------------------------- display -------------------------------- */
   const flowerDisplay = () => {
@@ -237,43 +208,37 @@ export default function Home() {
   /* ---------------------------------- main ---------------------------------- */
   return (
     <div className="overflow-hidden">
-      <AnimatePresence>{(!initialised || !imagesLoaded || loading) && <Loader />}</AnimatePresence>
-
       {/* flower */}
-      {initialised && (
-        <div className="absolute inset-0 bg-white">
-          <div className="absolute inset-0 bg-[rgba(210,219,243,0.5)]">{flowerDisplay()}</div>
-        </div>
-      )}
+      <div className="absolute inset-0 bg-white">
+        <div className="absolute inset-0 bg-[rgba(210,219,243,0.5)]">{flowerDisplay()}</div>
+      </div>
 
       <AnimatePresence>
-        {initialised && (
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 0.2 },
-            }}
-            className="relative h-screen w-screen"
-          >
-            {/* content */}
-            <div className="absolute right-10 top-10 md:top-20">{contentDisplay()}</div>
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            transition: { duration: 0.2 },
+          }}
+          className="relative h-screen w-screen"
+        >
+          {/* content */}
+          <div className="absolute right-10 top-10 md:top-20">{contentDisplay()}</div>
 
-            {/* desktop: social media */}
-            <div className="absolute bottom-10 left-10 hidden opacity-0 md:block" ref={socialMediaRef}>
-              <a
-                className="group relative block h-8 w-8 xl:h-10 xl:w-10"
-                href="https://github.com/sujenphea"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <IconGithub className="pointer-events-none h-full w-full transition-transform group-hover:scale-90" />
-              </a>
-            </div>
-          </motion.div>
-        )}
+          {/* desktop: social media */}
+          <div className="absolute bottom-10 left-10 hidden opacity-0 md:block" ref={socialMediaRef}>
+            <a
+              className="group relative block h-8 w-8 xl:h-10 xl:w-10"
+              href="https://github.com/sujenphea"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <IconGithub className="pointer-events-none h-full w-full transition-transform group-hover:scale-90" />
+            </a>
+          </div>
+        </motion.div>
       </AnimatePresence>
     </div>
   )
